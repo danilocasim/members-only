@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const indexRouter = require("./routes/indexRouter");
+const userRouter = require("./routes/userRouter");
 const assetsPath = path.join(__dirname, "public");
 
 const PORT = 9000;
@@ -12,6 +13,7 @@ app.use(express.static(assetsPath));
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", indexRouter);
+app.use("/", userRouter);
 
 app.listen(PORT, (err) => {
   if (err) throw err;
