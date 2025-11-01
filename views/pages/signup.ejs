@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form action="/signup" method="get">
+      <label for="firstName">Fist Name:</label>
+      <input type="text" id="firstName" name="firstName" required />
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" required />
+
+      <label for="username"> Username:</label>
+      <input type="text" id="username" name="username" required />
+
+      <label for="password"> Password:</label>
+      <input type="password" id="password" name="password" required />
+
+      <label for="confirmPassword">Confirm Password:</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        required
+      />
+      <label for="isAdmin">isAdmin</label>
+      <input type="checkbox" name="isAdmin" id="isAdmin" />
+
+      <div class="admin-password">
+        <label for="adminPassword">Admin Password:</label>
+        <input type="adminPassword" id="adminPassword" name="adminPassword" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+    <script src="signup.js"></script>
+  </body>
+</html>
