@@ -8,6 +8,7 @@
   </head>
   <body>
     <form action="/signup" method="post">
+      <%- include("../components/errors.ejs") %>
       <label for="firstName">Fist Name:</label>
       <input type="text" id="firstName" name="firstName" required />
       <label for="lastName">Last Name:</label>
@@ -31,7 +32,7 @@
 
       <div class="admin-password">
         <label for="adminPassword">Admin Password:</label>
-        <input type="adminPassword" id="adminPassword" name="adminPassword" />
+        <input type="password" id="adminPassword" name="adminPassword" />
       </div>
       <button type="submit">Submit</button>
     </form>
