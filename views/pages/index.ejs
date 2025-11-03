@@ -6,8 +6,16 @@
     <title>Home</title>
   </head>
   <body>
-    <h1>HOME</h1>
+    <% if(locals.currentUser) {%>
+    <h1>Hey! <%= currentUser.firstname %></h1>
+    <% if (locals.currentUser.isadmin) { %>
+    <h2>You're an admin</h2>
+    <% } %>
+    <a href="/logout">Logout</a>
+    <% } else { %>
+    <h1>You're not login</h1>
     <a href="/login">Login</a>
     <a href="/signup">Signup</a>
+    <% } %>
   </body>
 </html>

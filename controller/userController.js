@@ -19,3 +19,10 @@ module.exports.addUser = [
     res.redirect("/login");
   },
 ];
+
+module.exports.logout = async (req, res, next) => {
+  req.logout((err) => {
+    if (err) next(err);
+    res.redirect("/");
+  });
+};
