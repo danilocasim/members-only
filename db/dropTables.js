@@ -4,9 +4,10 @@ const { Client } = require("pg");
 require("dotenv").config();
 
 const SQL = `
-DROP TABLE posts;
+DROP TABLE IF EXISTS posts;
 
-DROP TABLE users;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS session;
 
 `;
 
