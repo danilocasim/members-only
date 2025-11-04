@@ -4,8 +4,10 @@ const {
   logout,
   postMessage,
   deletePost,
+  updateMembershipStatus,
 } = require("../controller/userController");
 const passport = require("passport");
+const { isAuth } = require("../middlewares/auth/authMiddleware");
 const userRouter = Router();
 
 userRouter.post("/signup", addUser);
@@ -18,13 +20,14 @@ userRouter.post(
   })
 );
 
-userRouter.get("/logout", logout);
+userRouter.get("/logout", isAuth, logout);
 
-userRouter.get("/post", (req, res) => res.render("pages/post"));
+userRouter.get("/post", isAuth, (req, res) => res.render("pages/post"));
 
-userRouter.post("/post", postMessage);
+userRouter.post("/post", isAuth, postMessage);
 userRouter.post("/deletePost", deletePost);
 userRouter.get("/joinClub", isAuth, (req, res) => res.render("pages/clubForm"));
 userRouter.post("/joinClub", isAuth, updateMembershipStatus);
 
+// middleware for checking authorized user
 module.exports = userRouter;
