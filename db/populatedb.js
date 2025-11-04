@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS users (
   lastName VARCHAR(255),
   username VARCHAR(255),
   password VARCHAR(255),
-  isAdmin BOOLEAN
+  isAdmin BOOLEAN,
+  isMember BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS posts (
