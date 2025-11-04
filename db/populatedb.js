@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS posts (
   userId INTEGER REFERENCES users (id),
   title VARCHAR(255),
   message VARCHAR(255),
-  timeStamp DATE
+  timeStamp TIMESTAMP
 );
 
 CREATE TABLE "session" (
