@@ -18,7 +18,7 @@ module.exports.addUser = async (
 
 module.exports.getAllPosts = async () => {
   const allPosts = await pool.query(
-    "SELECT posts.id, users.firstname, users.lastname, posts.title, posts.message, posts.timestamp FROM posts INNER JOIN users ON posts.userid = users.id"
+    "SELECT posts.id, users.firstname, users.lastname, posts.title, posts.message, posts.timestamp FROM posts INNER JOIN users ON posts.userid = users.id ORDER BY posts.id DESC"
   );
   return allPosts;
 };
