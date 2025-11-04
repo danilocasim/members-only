@@ -1,6 +1,7 @@
 const { validationResult, matchedData } = require("express-validator");
 const db = require("../db/queries");
 const signupValidators = require("../middlewares/validators/signupValidators");
+const membershipValidators = require("../middlewares/validators/membershipValidators");
 
 module.exports.addUser = [
   signupValidators,
@@ -40,3 +41,19 @@ module.exports.deletePost = async (req, res) => {
   await db.deletePost(postId);
   res.redirect("/");
 };
+
+module.exports.updateMembershipStatus = [
+  membershipValidators,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render("../views/pages/clubForm", {
+        errors: errors.array(),
+      });
+    }
+
+    const { id } = req.user;
+    await db.updateMembershipStatus(id);
+    res.redirect("/");
+  },
+];

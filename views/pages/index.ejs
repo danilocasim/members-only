@@ -7,8 +7,13 @@
   </head>
   <body>
     <% if(locals.currentUser) {%>
+
     <h1>Hey! <%= currentUser.firstname %></h1>
-    <%- include("../components/showAllPosts.ejs", {showDetails:
+    <% if (locals.currentUser.ismember) {%>
+    <h1>Verified!</h1>
+    <% } %> <% if (!locals.currentUser.ismember) {%>
+    <a href="/joinClub">Join our Club</a>
+    <% } %><%- include("../components/showAllPosts.ejs", {showDetails:
     locals.currentUser.isadmin || locals.currentUser.ismember, showDelete:
     locals.currentUser.isadmin}) %>
 

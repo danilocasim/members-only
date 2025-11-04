@@ -34,3 +34,12 @@ module.exports.postMessage = async (userId, title, message) => {
 module.exports.deletePost = async (postId) => {
   await pool.query(`DELETE FROM posts WHERE id = $1`, [postId]);
 };
+
+module.exports.updateMembershipStatus = async (userId) => {
+  await pool.query(
+    `UPDATE users
+    SET ismember = true 
+    WHERE id = $1`,
+    [userId]
+  );
+};

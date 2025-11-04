@@ -24,5 +24,7 @@ userRouter.get("/post", (req, res) => res.render("pages/post"));
 
 userRouter.post("/post", postMessage);
 userRouter.post("/deletePost", deletePost);
+userRouter.get("/joinClub", isAuth, (req, res) => res.render("pages/clubForm"));
+userRouter.post("/joinClub", isAuth, updateMembershipStatus);
 
 module.exports = userRouter;
