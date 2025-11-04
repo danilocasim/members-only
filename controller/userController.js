@@ -26,3 +26,17 @@ module.exports.logout = async (req, res, next) => {
     res.redirect("/");
   });
 };
+
+module.exports.postMessage = async (req, res) => {
+  const { id } = req.user;
+  const { title, message } = req.body;
+  await db.postMessage(id, title, message);
+
+  res.redirect("/");
+};
+
+module.exports.deletePost = async (req, res) => {
+  const { postId } = req.body;
+  await db.deletePost(postId);
+  res.redirect("/");
+};
