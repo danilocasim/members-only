@@ -5,10 +5,8 @@
 <% } %>
 <p><%= post.title %></p>
 <p><%= post.message %></p>
-<p><% if (locals.showDetails) { %> <%= post.timestamp %></p>
-<% } else {%>
-<p>Time is illusion</p>
-<% } %> <% if (locals.showDelete) { %>
+<%= post.timestamp %></p>
+ <% if (locals.showDelete) { %>
 <form action="/deletePost" method="post">
   <button name="postId" value="<%= post.id %>">Delete</button>
 </form>
