@@ -29,5 +29,4 @@ userRouter.post("/deletePost", deletePost);
 userRouter.get("/joinClub", isAuth, (req, res) => res.render("pages/clubForm"));
 userRouter.post("/joinClub", isAuth, updateMembershipStatus);
 
-// middleware for checking authorized user
 module.exports = userRouter;
