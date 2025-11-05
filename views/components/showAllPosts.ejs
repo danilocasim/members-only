@@ -1,13 +1,31 @@
-<% if (locals.posts) { %> <% posts.forEach((post) => { %>
-<p><% if (locals.showDetails) { %> <%= post.firstname %></p>
-<% } else {%>
-<p>Unknown</p>
+<% if (locals.posts) { %>
+<div class="cards">
+  <% posts.forEach((post) => { %>
+  <div class="card">
+    <div class="details-wrapper">
+      <div class="details">
+        <div class="avatar">O</div>
+        <div class="details-info">
+          <% if (locals.showDetails) { %>
+          <p class="name"><%= post.firstname %></p>
+          <% } else {%>
+          <p class="name">Unknown</p>
+          <% } %>
+          <p class="timestamp"><%= post.timestamp %></p>
+        </div>
+      </div>
+      <div class="delete">
+        <% if (locals.showDelete) { %>
+        <form action="/deletePost" method="post">
+          <button name="postId" value="<%= post.id %>">Delete</button>
+        </form>
+        <% } %>
+      </div>
+    </div>
+
+    <p class="title"><%= post.title %></p>
+    <p class="message"><%= post.message %></p>
+  </div>
+  <% }) %>
+</div>
 <% } %>
-<p><%= post.title %></p>
-<p><%= post.message %></p>
-<%= post.timestamp %></p>
- <% if (locals.showDelete) { %>
-<form action="/deletePost" method="post">
-  <button name="postId" value="<%= post.id %>">Delete</button>
-</form>
-<% } %> <% }) %> <% } %>

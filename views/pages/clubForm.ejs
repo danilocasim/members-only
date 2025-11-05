@@ -4,20 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Club Form</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <form action="/joinClub" method="post">
-      <%- include("../components/errors.ejs") %>
-
-      <label for="membershipPassword">Membership Password</label>
-      <input
-        type="password"
-        id="membershipPassword"
-        name="membershipPassword"
-        required
-      />
-
-      <button type="submit">Submit</button>
-    </form>
+    <%- include("../components/nav-form", {title: "Membership Form"}) %>
+    <div class="container membership-container">
+      <form action="/joinClub" method="post">
+        <%- include("../components/errors.ejs") %>
+        <label for="membershipPassword">Membership Password</label>
+        <input
+          type="password"
+          id="membershipPassword"
+          name="membershipPassword"
+          required
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <%- include("../components/bot-nav",{ isAuthenticated: true })%>
   </body>
 </html>

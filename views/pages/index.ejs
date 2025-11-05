@@ -4,28 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <% if(locals.currentUser) {%>
-
-    <h1>Hey! <%= currentUser.firstname %></h1>
-    <% if (locals.currentUser.ismember) {%>
-    <h1>Verified!</h1>
-    <% } %> <% if (!locals.currentUser.ismember) {%>
-    <a href="/joinClub">Join our Club</a>
-    <% } %><%- include("../components/showAllPosts.ejs", {showDetails:
-    locals.currentUser.isadmin || locals.currentUser.ismember, showDelete:
-    locals.currentUser.isadmin}) %>
-
-    <a href="/post">post</a>
-    <a href="/logout">Logout</a>
-    <% } else { %>
-    <h1>You're not login</h1>
-    <%- include("../components/showAllPosts.ejs", {showDetails: false,
-    showDelete: false}) %>
-
-    <a href="/login">Login</a>
-    <a href="/signup">Signup</a>
-    <% } %>
+    <% if(locals.currentUser) {%> <%- include("../components/nav.ejs",
+    {memberStatus: locals.currentUser.ismember, user:
+    locals.currentUser.firstname, isAuthenticated: true, notMember:
+    locals.currentUser.ismember}) %>
+    <div class="container">
+      <%- include("../components/showAllPosts.ejs", {showDetails:
+      locals.currentUser.isadmin || locals.currentUser.ismember, showDelete:
+      locals.currentUser.isadmin}) %> <%- include("../components/bot-nav.ejs",
+      {isAuthenticated: true}) %>
+    </div>
+    <% } else { %> <%- include("../components/nav.ejs", {notMember: true, user:
+    "Guest", isAuthenticated: false}) %>
+    <div class="container">
+      <%- include("../components/showAllPosts.ejs", {showDetails: false,
+      showDelete: false}) %> <%- include("../components/bot-nav.ejs",
+      {isAuthenticated: false}) %> <% } %>
+    </div>
   </body>
 </html>
