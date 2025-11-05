@@ -38,7 +38,15 @@ nav {
 nav .status {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
+}
+
+.status h1 {
+  font-size: clamp(1rem, 2.5vw, 1.6rem);
+}
+
+.status svg {
+  width: clamp(1rem, 2.5vw, 1.6rem);
 }
 
 nav d nav ul {

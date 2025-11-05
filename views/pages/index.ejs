@@ -9,7 +9,7 @@
   <body>
     <% if(locals.currentUser) {%> <%- include("../components/nav.ejs",
     {memberStatus: locals.currentUser.ismember, user:
-    locals.currentUser.firstname, isAuthenticated: true, notMember:
+    locals.currentUser.username, isAuthenticated: true, notMember:
     locals.currentUser.ismember}) %>
     <div class="container">
       <%- include("../components/showAllPosts.ejs", {showDetails:

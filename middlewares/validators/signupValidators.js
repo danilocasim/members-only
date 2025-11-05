@@ -12,8 +12,8 @@ const signupValidators = [
     .isLength({ min: 5 })
     .withMessage("lastName must consists of 5 char"),
   body("username")
-    .isLength({ min: 5 })
-    .withMessage("username must consists of 5 char")
+    .isLength({ min: 3, max: 7 })
+    .withMessage("username minimum of 3 up to 7 char")
     .custom(async (value, { req }) => {
       const username = await db.checkUsernameDuplication(value);
       console.log(username);
