@@ -89,6 +89,10 @@ h1 a {
   font-size: 2.5rem;
 }
 
+.person {
+  width: 3rem;
+}
+
 .name,
 .title {
   font-weight: bold;
