@@ -13,6 +13,10 @@ a {
   color: black;
 }
 
+.error {
+  color: red;
+}
+
 button {
   background-color: #2a0000;
   color: rgb(209, 143, 20);
