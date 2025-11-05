@@ -1,5 +1,6 @@
 const { body } = require("express-validator");
 require("dotenv").config();
+const db = require("../../db/queries");
 
 const { ADMIN_PASSWORD } = process.env;
 
@@ -12,7 +13,14 @@ const signupValidators = [
     .withMessage("lastName must consists of 5 char"),
   body("username")
     .isLength({ min: 5 })
-    .withMessage("username must consists of 5 char"),
+    .withMessage("username must consists of 5 char")
+    .custom(async (value, { req }) => {
+      const username = await db.checkUsernameDuplication(value);
+      if (username.length === 0) return false;
+      else return true;
+    })
+    .withMessage("Username already exists!"),
+  ,
   body("password")
     .isLength({ min: 5 })
     .withMessage("password must consists of 5 char"),

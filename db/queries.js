@@ -43,3 +43,7 @@ module.exports.updateMembershipStatus = async (userId) => {
     [userId]
   );
 };
+
+module.exports.checkUsernameDuplication = async (username) => {
+  await pool.query("SELECT * FROM users WHERE username = $1", [username]);
+};

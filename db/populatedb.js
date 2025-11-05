@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   firstName VARCHAR(255),
   lastName VARCHAR(255),
-  username VARCHAR(255),
+  username VARCHAR(255) UNIQUE,
   password VARCHAR(255),
   isAdmin BOOLEAN,
   isMember BOOLEAN DEFAULT FALSE
@@ -35,20 +35,35 @@ CREATE INDEX "IDX_session_expire" ON "session" ("expire");
 
 `;
 
-const { DB_NAME, DB_HOST, USERNAME, DB_PASSWORD } = process.env;
+const { NODE_ENV, DB_NAME, DB_HOST, USERNAME, DB_PASSWORD } = process.env;
 
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, PGSSLMODE, PGCHANNELBINDING } =
   process.env;
 
-async function main() {
-  console.log("seeding...");
-  const client = new Client({
-    connectionString: `postgresql://${USERNAME}:${DB_PASSWORD}@${DB_HOST}:5432/${DB_NAME}`,
-  });
-  await client.connect();
-  await client.query(SQL);
-  await client.end();
-  console.log("done");
+if (NODE_ENV == "dev") {
+  async function main() {
+    console.log("seeding...");
+    const client = new Client({
+      connectionString: `postgresql://${USERNAME}:${DB_PASSWORD}@${DB_HOST}:5432/${DB_NAME}`,
+    });
+    await client.connect();
+    await client.query(SQL);
+    await client.end();
+    console.log("done");
+  }
+  main();
 }
 
-main();
+if (NODE_ENV == "prod") {
+  async function main() {
+    console.log("seeding...");
+    const client = new Client({
+      connectionString: `postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}:5432/${PGDATABASE}`,
+    });
+    await client.connect();
+    await client.query(SQL);
+    await client.end();
+    console.log("done");
+  }
+  main();
+}
