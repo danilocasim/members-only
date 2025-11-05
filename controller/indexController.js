@@ -13,3 +13,11 @@ module.exports.renderIndex = async (req, res) => {
 
   res.render("pages/index", { posts: transformedDate });
 };
+
+module.exports.renderSignup = async (req, res) => {
+  res.render("pages/signup");
+};
+
+module.exports.renderLogin = async (req, res) => {
+  res.render("pages/login");
+};
