@@ -28,6 +28,10 @@ module.exports.logout = async (req, res, next) => {
   });
 };
 
+module.exports.renderPostForm = async (req, res) => {
+  res.render("pages/post");
+};
+
 module.exports.postMessage = async (req, res) => {
   const { id } = req.user;
   const { title, message } = req.body;
@@ -40,6 +44,10 @@ module.exports.deletePost = async (req, res) => {
   const { postId } = req.body;
   await db.deletePost(postId);
   res.redirect("/");
+};
+
+module.exports.renderMembershipForm = async (req, res) => {
+  res.render("pages/clubForm");
 };
 
 module.exports.updateMembershipStatus = [
