@@ -2,6 +2,7 @@ const { validationResult, matchedData } = require("express-validator");
 const db = require("../db/queries");
 const signupValidators = require("../middlewares/validators/signupValidators");
 const membershipValidators = require("../middlewares/validators/membershipValidators");
+const postingValidators = require("../middlewares/validators/postingValidators");
 
 module.exports.addUser = [
   signupValidators,
@@ -21,6 +22,23 @@ module.exports.addUser = [
   },
 ];
 
+module.exports.postMessage = [
+  postingValidators,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render("../views/pages/post", {
+        errors: errors.array(),
+      });
+    }
+    const { id } = req.user;
+    const { title, message } = matchedData(req);
+    await db.postMessage(id, title, message);
+
+    res.redirect("/");
+  },
+];
+
 module.exports.logout = async (req, res, next) => {
   req.logout((err) => {
     if (err) next(err);
@@ -30,14 +48,6 @@ module.exports.logout = async (req, res, next) => {
 
 module.exports.renderPostForm = async (req, res) => {
   res.render("pages/post");
-};
-
-module.exports.postMessage = async (req, res) => {
-  const { id } = req.user;
-  const { title, message } = req.body;
-  await db.postMessage(id, title, message);
-
-  res.redirect("/");
 };
 
 module.exports.deletePost = async (req, res) => {

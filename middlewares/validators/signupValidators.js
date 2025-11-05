@@ -16,7 +16,8 @@ const signupValidators = [
     .withMessage("username must consists of 5 char")
     .custom(async (value, { req }) => {
       const username = await db.checkUsernameDuplication(value);
-      if (username.length === 0) return false;
+      console.log(username);
+      if (!username) return false;
       else return true;
     })
     .withMessage("Username already exists!"),
