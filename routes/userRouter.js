@@ -10,7 +10,10 @@ const {
 } = require("../controller/userController");
 
 const passport = require("passport");
-const { isAuth } = require("../middlewares/auth/authMiddleware");
+const {
+  isAuth,
+  isAlreadyMember,
+} = require("../middlewares/auth/authMiddleware");
 const userRouter = Router();
 
 userRouter.post("/signup", addUser);
@@ -29,7 +32,7 @@ userRouter.get("/post", isAuth, renderPostForm);
 
 userRouter.post("/post", isAuth, postMessage);
 userRouter.post("/deletePost", deletePost);
-userRouter.get("/joinClub", isAuth, renderMembershipForm);
-userRouter.post("/joinClub", isAuth, updateMembershipStatus);
+userRouter.get("/joinClub", isAuth, isAlreadyMember, renderMembershipForm);
+userRouter.post("/joinClub", isAuth, isAlreadyMember, updateMembershipStatus);
 
 module.exports = userRouter;
